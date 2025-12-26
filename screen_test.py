@@ -64,14 +64,38 @@ class ScreenTest:
 
         # 所有设置完成后再显示窗口
         self.root.deiconify()
-        self.root.focus_force()
 
-        # 绑定事件
+        # 强制获取焦点（SSH 环境需要）
+        self.root.after(100, lambda: self.root.focus_force())
+        self.root.after(200, lambda: self.canvas.focus_set())
+
+        # 绑定事件 - 同时绑定到 root 和 canvas
         self.root.bind('q', self.quit_app)
         self.root.bind('Q', self.quit_app)
         self.root.bind('<Escape>', self.quit_app)
         self.root.bind('<space>', self.next_color)
-        self.canvas.bind('<Button-1>', self.next_color)
+        self.root.bind('<KeyPress>', self.on_key_press)
+
+        # Canvas 事件
+        self.canvas.bind('<Button-1>', self.on_click)
+        self.canvas.bind('q', self.quit_app)
+        self.canvas.bind('Q', self.quit_app)
+        self.canvas.bind('<Escape>', self.quit_app)
+        self.canvas.bind('<space>', self.next_color)
+
+        # 让 canvas 可以接收键盘事件
+        self.canvas.focus_set()
+
+    def on_click(self, event=None):
+        """鼠标点击事件 - 切换颜色并确保焦点"""
+        self.canvas.focus_set()
+        self.next_color()
+
+    def on_key_press(self, event):
+        """任意键按下 - 用于调试和确保焦点"""
+        # 打印调试信息（可选）
+        # print(f"Key pressed: {event.keysym}")
+        pass
 
     def next_color(self, event=None):
         """切换到下一个颜色"""
