@@ -13,8 +13,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# 运行应用
-python screen_test.py
+# 运行应用，传递所有命令行参数
+python screen_test.py "$@"
 
 # 退出后自动停用虚拟环境
 deactivate
