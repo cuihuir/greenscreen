@@ -6,5 +6,9 @@ sudo apt update
 sudo apt install -y python3-tk
 
 echo ""
-echo "环境配置完成！"
+echo "创建虚拟环境..."
+python3 -m venv venv
+
+echo ""
+echo "✓ 环境配置完成！"
 echo "现在可以运行: ./run.sh"
