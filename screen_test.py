@@ -11,8 +11,8 @@ import tkinter as tk
 class ScreenTest:
     # 预定义的颜色映射
     COLOR_MAP = {
-        'red': '#FF0000',
         'green': '#00FF00',
+        'red': '#FF0000',
         'blue': '#0000FF',
         'white': '#FFFFFF',
         'black': '#000000',
@@ -23,8 +23,9 @@ class ScreenTest:
 
     # 默认颜色列表
     DEFAULT_COLORS = [
-        '#FF0000',  # 红色
+        
         '#00FF00',  # 绿色
+        '#FF0000',  # 红色
         '#0000FF',  # 蓝色
         '#FFFFFF',  # 白色
         '#000000',  # 黑色
@@ -70,6 +71,7 @@ class ScreenTest:
         self.root.bind('q', self.quit_app)
         self.root.bind('Q', self.quit_app)
         self.root.bind('<Escape>', self.quit_app)
+        self.root.bind('<Control-c>', self.quit_app)  # Ctrl+C
         self.root.bind('<space>', self.next_color)
         self.canvas.bind('<Button-1>', self.next_color)
 
